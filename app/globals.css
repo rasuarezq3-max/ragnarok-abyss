@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cinzel), ui-serif, Georgia, serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-gold: var(--gold);
+  --color-poring: var(--poring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+/* Theme tokens — change these to re-skin the whole site */
+:root {
+  color-scheme: dark;
+  --background: oklch(0.16 0.06 285);
+  --foreground: oklch(0.97 0.01 290);
+  --card: oklch(0.22 0.09 285);
+  --card-foreground: oklch(0.97 0.01 290);
+  --popover: oklch(0.22 0.09 285);
+  --popover-foreground: oklch(0.97 0.01 290);
+  --primary: oklch(0.6 0.22 295);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.3 0.12 285);
+  --secondary-foreground: oklch(0.97 0.01 290);
+  --muted: oklch(0.26 0.08 285);
+  --muted-foreground: oklch(0.8 0.05 290);
+  --accent: oklch(0.82 0.15 85);
+  --accent-foreground: oklch(0.2 0.05 285);
+  --destructive: oklch(0.6 0.22 25);
+  --border: oklch(0.45 0.15 295 / 0.6);
+  --input: oklch(0.35 0.1 290);
+  --ring: oklch(0.82 0.15 85);
+  --gold: oklch(0.84 0.14 85);
+  --poring: oklch(0.78 0.15 355);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+/* Fades the solid backdrop of generated character art into the page */
+@utility fade-mask {
+  mask-image: radial-gradient(ellipse 60% 62% at 50% 50%, black 62%, transparent 100%);
+}
+
+@utility text-gold-gradient {
+  background-image: linear-gradient(180deg, oklch(0.95 0.08 90), var(--gold) 55%, oklch(0.65 0.14 60));
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-arcane-gradient {
+  background-image: linear-gradient(180deg, oklch(0.92 0.1 320), oklch(0.68 0.25 310) 60%, oklch(0.5 0.24 295));
+  background-clip: text;
+  color: transparent;
+}
+
+@utility frame-gold {
+  border: 2px solid oklch(0.84 0.14 85 / 0.85);
+  box-shadow:
+    0 0 0 1px oklch(0.3 0.12 285),
+    0 0 18px oklch(0.6 0.22 295 / 0.55),
+    inset 0 0 14px oklch(0.6 0.22 295 / 0.35);
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@utility animate-float {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+@utility animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-twinkle {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
